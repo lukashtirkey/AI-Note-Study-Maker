@@ -29,7 +29,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
           <div>
             <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
-              StudyCraft AI
+              AI Note-Study Maker
             </h1>
             <p className="text-[11px] text-slate-400 font-medium">AI Notetaker & Study Assistant</p>
           </div>
@@ -58,18 +58,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* Main Landing Tagline */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold tracking-widest uppercase animate-pulse-glow">
             <Zap className="size-3.5 text-amber-400" />
-            <span>Record · Transcribe · Revise</span>
+            <span>Welcome to AI Note-Study Maker</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-            Turn Lectures & Meetings into{' '}
+            Welcome to{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
-              High-Grade Study Materials
+              AI Note-Study Maker
             </span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-normal">
-            Record live Zoom sessions, Google Meet calls, and lectures, or upload audio/video files. Get timestamped transcripts, structured study guides, 3D flashcards, and practice quizzes instantly.
+            Turn live lectures, meetings, audio recordings, and raw text into structured study guides, 3D flashcards, and interactive practice quizzes instantly.
           </p>
 
           {/* CTA Group */}
