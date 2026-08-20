@@ -32,6 +32,34 @@
   }
 }
 
+/* Modern Professional Dynamic Application Background */
+.app-bg-gradient {
+  position: relative;
+  background-color: #090d16;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.15) 0px, transparent 45%),
+    radial-gradient(at 85% 20%, rgba(168, 85, 247, 0.12) 0px, transparent 45%),
+    radial-gradient(at 50% 85%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, rgba(59, 130, 246, 0.1) 0px, transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
+.light .app-bg-gradient,
+.light.app-bg-gradient {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.07) 0px, transparent 45%),
+    radial-gradient(at 85% 20%, rgba(168, 85, 247, 0.05) 0px, transparent 45%),
+    radial-gradient(at 50% 85%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
 /* Glassmorphism utility */
 .glass-panel {
   background: var(--bg-card);

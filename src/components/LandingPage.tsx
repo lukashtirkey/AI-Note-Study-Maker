@@ -20,7 +20,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onEnterDemo
 }) => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen app-bg-gradient text-slate-100 flex flex-col font-sans">
       {/* Header Navigation */}
       <header className="w-full glass-panel border-b border-slate-800/80 px-6 lg:px-12 py-4 flex items-center justify-between sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md">
         <div className="flex items-center gap-3">

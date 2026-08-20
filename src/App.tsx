@@ -219,7 +219,7 @@ export function App() {
   }
 
   return (
-    <div className={`min-h-screen flex flex-col bg-slate-950 text-slate-100 ${settings.theme}`}>
+    <div className={`min-h-screen flex flex-col app-bg-gradient text-slate-100 ${settings.theme}`}>
       {/* Top Navbar */}
       <Navbar
         settings={settings}
