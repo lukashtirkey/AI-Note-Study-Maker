@@ -12,16 +12,19 @@ import { SettingsModal } from './components/SettingsModal';
 import { LandingPage } from './components/LandingPage';
 import { AuthModal } from './components/AuthModal';
 
+import { Volume2, X, Sparkles } from 'lucide-react';
 import type { NavigationTab, StudyDeck, StudyNote, UserSettings, Flashcard } from './types';
 import { PRESET_DECKS } from './data/presetDecks';
 import { aiService } from './services/aiService';
 import { supabase, isSupabaseConfigured } from './services/supabaseClient';
 import { supabaseDataService } from './services/supabaseDataService';
+import { soundService } from './services/soundService';
 
 export function App() {
   const [viewMode, setViewMode] = useState<'landing' | 'workspace'>('landing');
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [showWelcomeToast, setShowWelcomeToast] = useState(true);
 
   const [decks, setDecks] = useState<StudyDeck[]>(() => {
     const saved = localStorage.getItem('studycraft_decks');
@@ -47,6 +50,25 @@ export function App() {
       studyGoalMinutesPerDay: 30
     };
   });
+
+  // Speak Welcome Greeting & Show Toast on App Load
+  useEffect(() => {
+    soundService.speakWelcomeGreeting();
+
+    const handleFirstClick = () => {
+      soundService.speakWelcomeGreeting();
+    };
+    window.addEventListener('click', handleFirstClick, { once: true });
+
+    const autoDismissTimer = setTimeout(() => {
+      setShowWelcomeToast(false);
+    }, 7000);
+
+    return () => {
+      clearTimeout(autoDismissTimer);
+      window.removeEventListener('click', handleFirstClick);
+    };
+  }, []);
 
   const loadUserCloudSessions = async (_userId: string) => {
     const cloudDecks = await supabaseDataService.fetchUserSessions();
@@ -199,9 +221,41 @@ export function App() {
     0
   );
 
+  const renderWelcomeBanner = () => {
+    if (!showWelcomeToast) return null;
+    return (
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-900/95 border border-indigo-500/50 shadow-2xl shadow-indigo-500/30 backdrop-blur-xl text-white animate-bounce-short">
+        <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+          <Sparkles className="size-5 text-amber-300 animate-pulse" />
+        </div>
+        <div>
+          <h4 className="text-xs font-extrabold tracking-wide bg-gradient-to-r from-indigo-300 via-purple-200 to-pink-300 bg-clip-text text-transparent">
+            Welcome to AI Note-Study Maker
+          </h4>
+          <p className="text-[11px] text-slate-400 font-medium">Your AI Notetaker & Study Guide Studio</p>
+        </div>
+        <button
+          onClick={() => soundService.speakWelcomeGreeting()}
+          className="p-1.5 rounded-lg bg-indigo-600/40 hover:bg-indigo-600 text-indigo-200 hover:text-white transition-all ml-1"
+          title="Replay Voice Greeting"
+        >
+          <Volume2 className="size-4" />
+        </button>
+        <button
+          onClick={() => setShowWelcomeToast(false)}
+          className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-all"
+          title="Close Notification"
+        >
+          <X className="size-4" />
+        </button>
+      </div>
+    );
+  };
+
   if (viewMode === 'landing' && !currentUser) {
     return (
       <>
+        {renderWelcomeBanner()}
         <LandingPage
           onOpenAuth={() => setAuthModalOpen(true)}
           onEnterDemo={() => setViewMode('workspace')}
@@ -220,6 +274,7 @@ export function App() {
 
   return (
     <div className={`min-h-screen flex flex-col app-bg-gradient text-slate-100 ${settings.theme}`}>
+      {renderWelcomeBanner()}
       {/* Top Navbar */}
       <Navbar
         settings={settings}

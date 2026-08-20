@@ -184,6 +184,31 @@ export class SoundService {
     this.activeNodes.forEach((node) => node.stop());
     this.activeNodes.clear();
   }
+
+  /**
+   * Audibly speaks "Welcome to AI Note-Study Maker" using Web Speech API
+   */
+  public speakWelcomeGreeting(): void {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance('Welcome to AI Note-Study Maker');
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang.startsWith('en-US') || v.lang.startsWith('en'));
+        if (englishVoice) {
+          utterance.voice = englishVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      } catch (err) {
+        console.warn('Speech synthesis unavailable:', err);
+      }
+    }
+  }
 }
 
 export const soundService = new SoundService();
