@@ -7,7 +7,6 @@ import {
   GitFork, 
   CheckCircle2, 
   Wand2, 
-  BookOpen,
   Copy,
   Check,
   Tag,
@@ -242,16 +241,6 @@ export const NoteGenerator: React.FC<NoteGeneratorProps> = ({
             </div>
           </div>
 
-          {/* Executive Summary Card */}
-          <div className="p-5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 space-y-2">
-            <h4 className="text-sm font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-2">
-              <BookOpen className="size-4 text-indigo-400" />
-              Executive Summary
-            </h4>
-            <p className="text-sm text-slate-200 leading-relaxed font-normal">
-              {currentNote.summary}
-            </p>
-          </div>
 
           {/* Action Items (if meeting note) */}
           {currentNote.actionItems && currentNote.actionItems.length > 0 && (

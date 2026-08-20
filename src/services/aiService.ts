@@ -99,9 +99,10 @@ export class AIService {
     // 4. Built-in intelligent engine fallback
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    const cleanLines = rawInput.split('\n').filter(l => l.trim().length > 0);
-    const summaryText = rawInput.length > 150 
-      ? `This study guide analyzes ${subject || title}. ` + cleanLines.slice(0, 3).join(' ')
+    const sanitizedInput = rawInput.replace(/\b(\w+)(?:\s+\1\b)+/gi, '$1');
+    const cleanLines = Array.from(new Set(sanitizedInput.split('\n').map(l => l.trim()).filter(l => l.length > 0)));
+    const summaryText = cleanLines.length > 0 
+      ? `Study guide analysis for ${title || subject}: ` + cleanLines.slice(0, 2).join(' ')
       : `Comprehensive study breakdown for ${title || subject}: Core theoretical frameworks, key mechanisms, and practical applications.`;
 
     const bulletPoints = cleanLines.length >= 3 
