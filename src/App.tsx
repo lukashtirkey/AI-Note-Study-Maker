@@ -25,6 +25,24 @@ export function App() {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [showWelcomeToast, setShowWelcomeToast] = useState(true);
+  const [welcomeUserName, setWelcomeUserName] = useState<string>('');
+  const [bgThemeIndex, setBgThemeIndex] = useState(0);
+
+  // 3-Second Automatic Background Color Rotation
+  useEffect(() => {
+    const bgTimer = setInterval(() => {
+      setBgThemeIndex(prev => (prev + 1) % 5);
+    }, 3000);
+    return () => clearInterval(bgTimer);
+  }, []);
+
+  const triggerUserWelcome = (userObj?: any) => {
+    const rawName = userObj?.user_metadata?.full_name || userObj?.user_metadata?.name || userObj?.email?.split('@')[0] || '';
+    const formattedName = rawName ? rawName.trim().split(' ')[0] : '';
+    setWelcomeUserName(formattedName);
+    setShowWelcomeToast(true);
+    soundService.speakUserWelcome(formattedName);
+  };
 
   const [decks, setDecks] = useState<StudyDeck[]>(() => {
     const saved = localStorage.getItem('studycraft_decks');
@@ -87,6 +105,7 @@ export function App() {
         setCurrentUser(session.user);
         setViewMode('workspace');
         loadUserCloudSessions(session.user.id);
+        triggerUserWelcome(session.user);
       }
     });
 
@@ -95,6 +114,7 @@ export function App() {
         setCurrentUser(session.user);
         setViewMode('workspace');
         loadUserCloudSessions(session.user.id);
+        triggerUserWelcome(session.user);
       } else {
         setCurrentUser(null);
       }
@@ -230,12 +250,12 @@ export function App() {
         </div>
         <div>
           <h4 className="text-xs font-extrabold tracking-wide bg-gradient-to-r from-indigo-300 via-purple-200 to-pink-300 bg-clip-text text-transparent">
-            Welcome to AI Note-Study Maker
+            {welcomeUserName ? `Welcome to the AI Note-Study Maker, ${welcomeUserName}!` : 'Welcome to the AI Note-Study Maker'}
           </h4>
           <p className="text-[11px] text-slate-400 font-medium">Your AI Notetaker & Study Guide Studio</p>
         </div>
         <button
-          onClick={() => soundService.speakWelcomeGreeting()}
+          onClick={() => soundService.speakUserWelcome(welcomeUserName)}
           className="p-1.5 rounded-lg bg-indigo-600/40 hover:bg-indigo-600 text-indigo-200 hover:text-white transition-all ml-1"
           title="Replay Voice Greeting"
         >
@@ -252,13 +272,18 @@ export function App() {
     );
   };
 
+  const bgClass = `app-bg-gradient bg-rotate-${bgThemeIndex}`;
+
   if (viewMode === 'landing' && !currentUser) {
     return (
-      <>
+      <div className={`min-h-screen flex flex-col ${bgClass} text-slate-100 ${settings.theme}`}>
         {renderWelcomeBanner()}
         <LandingPage
           onOpenAuth={() => setAuthModalOpen(true)}
-          onEnterDemo={() => setViewMode('workspace')}
+          onEnterDemo={() => {
+            setViewMode('workspace');
+            triggerUserWelcome(currentUser);
+          }}
         />
         <AuthModal
           isOpen={authModalOpen}
@@ -266,14 +291,15 @@ export function App() {
           onSuccess={(usr) => {
             setCurrentUser(usr);
             setViewMode('workspace');
+            triggerUserWelcome(usr);
           }}
         />
-      </>
+      </div>
     );
   }
 
   return (
-    <div className={`min-h-screen flex flex-col app-bg-gradient text-slate-100 ${settings.theme}`}>
+    <div className={`min-h-screen flex flex-col ${bgClass} text-slate-100 ${settings.theme}`}>
       {renderWelcomeBanner()}
       {/* Top Navbar */}
       <Navbar

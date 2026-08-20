@@ -186,13 +186,18 @@ export class SoundService {
   }
 
   /**
-   * Audibly speaks "Welcome to AI Note-Study Maker" using Web Speech API
+   * Audibly speaks "Welcome to AI Note-Study Maker" greeting with personalized user name
    */
-  public speakWelcomeGreeting(): void {
+  public speakUserWelcome(userName?: string): void {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       try {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance('Welcome to AI Note-Study Maker');
+        const formattedName = userName ? userName.trim().split(' ')[0] : '';
+        const greetingText = formattedName 
+          ? `Welcome to the AI Note-Study Maker, ${formattedName}`
+          : `Welcome to the AI Note-Study Maker`;
+
+        const utterance = new SpeechSynthesisUtterance(greetingText);
         utterance.rate = 0.95;
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
@@ -208,6 +213,13 @@ export class SoundService {
         console.warn('Speech synthesis unavailable:', err);
       }
     }
+  }
+
+  /**
+   * Audibly speaks "Welcome to AI Note-Study Maker" using Web Speech API
+   */
+  public speakWelcomeGreeting(): void {
+    this.speakUserWelcome();
   }
 }
 

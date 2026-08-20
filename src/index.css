@@ -32,19 +32,66 @@
   }
 }
 
-/* Modern Professional Dynamic Application Background */
+/* Modern Professional Dynamic Application Background with 3s Auto-Rotation */
 .app-bg-gradient {
   position: relative;
-  background-color: #090d16;
-  background-image: 
-    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.15) 0px, transparent 45%),
-    radial-gradient(at 85% 20%, rgba(168, 85, 247, 0.12) 0px, transparent 45%),
-    radial-gradient(at 50% 85%, rgba(236, 72, 153, 0.1) 0px, transparent 50%),
-    radial-gradient(at 20% 80%, rgba(59, 130, 246, 0.1) 0px, transparent 40%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  transition: background-color 1.5s ease-in-out, background-image 1.5s ease-in-out;
   background-attachment: fixed;
+}
+
+.bg-rotate-0 {
+  background-color: #080c14;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.2) 0px, transparent 50%),
+    radial-gradient(at 85% 20%, rgba(168, 85, 247, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 85%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.bg-rotate-1 {
+  background-color: #08101d;
+  background-image: 
+    radial-gradient(at 20% 80%, rgba(59, 130, 246, 0.22) 0px, transparent 50%),
+    radial-gradient(at 80% 15%, rgba(16, 185, 129, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 30%, rgba(99, 102, 241, 0.18) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.bg-rotate-2 {
+  background-color: #13081c;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(236, 72, 153, 0.22) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(244, 63, 94, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.18) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.bg-rotate-3 {
+  background-color: #061314;
+  background-image: 
+    radial-gradient(at 80% 20%, rgba(20, 184, 166, 0.22) 0px, transparent 50%),
+    radial-gradient(at 20% 75%, rgba(6, 182, 212, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 20%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.bg-rotate-4 {
+  background-color: #140e06;
+  background-image: 
+    radial-gradient(at 15% 85%, rgba(245, 158, 11, 0.2) 0px, transparent 50%),
+    radial-gradient(at 85% 15%, rgba(239, 68, 68, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
 }
 
 .light .app-bg-gradient,
